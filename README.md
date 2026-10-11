@@ -2,11 +2,20 @@
 
 A Chrome and Edge extension with clearer Genesys agent cards, saved contacts, shift notes, a sliding desk panel and click-to-call tools.
 
-## Latest version: 1.3.1
+## Latest version: 1.3.2
 
-[Download Agent-Cards-Plus-v1.3.1.zip](Agent-Cards-Plus-v1.3.1.zip?raw=true)
+[Download Agent-Cards-Plus-v1.3.2.zip](Agent-Cards-Plus-v1.3.2.zip?raw=true)
 
-### Bug fixes in this version
+### Bug fixes in 1.3.2
+
+- Older contact-save replies cannot hide new contacts or restore an outdated number on screen after another window edits them.
+- Hiding or removing the side panel during startup stops its controllers and timers from loading afterwards.
+- A delayed preferences read cannot undo the tab or theme you have just chosen in the side panel.
+- The wallboard retains newer font size, theme and Auto fit changes received while it is loading.
+
+Existing contacts migrate automatically, with save order retained across worker restarts. This update adds no browser permissions.
+
+### Included fixes from 1.3.1
 
 - Auto fit keeps working for widgets further down a scrolling dashboard, including full-width bands.
 - Temporary card measurements preserve the table and page scroll position.
@@ -42,6 +51,6 @@ The archive includes the source code, full README, installation guide and tests.
 
 ## Validation
 
-All 147 automated checks passed for v1.3.1, including 13 new regression cases for the confirmed bugs. Checks use simulated documents, geometry and browser APIs. The current layout and real account integration still need checking on a live Genesys wallboard; no real phone call was made during testing.
+All 156 automated checks passed for v1.3.2, including nine new checks for delayed contact replies, interrupted panel startup, preference restoration, migration and storage failures. Checks use simulated documents, geometry and browser APIs. The current layout and real account integration still need checking on a live Genesys wallboard; no real phone call was made during testing.
 
 Auto fit targets Agent Status widgets. Other native Genesys widgets retain their own content layout and scrolling.
