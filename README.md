@@ -2,11 +2,23 @@
 
 A Chrome and Edge extension with clearer Genesys agent cards, saved contacts, shift notes, a sliding desk panel and click-to-call tools.
 
-## Latest version: 1.3.2
+## Latest version: 1.3.3
 
-[Download Agent-Cards-Plus-v1.3.2.zip](Agent-Cards-Plus-v1.3.2.zip?raw=true)
+[Download Agent-Cards-Plus-v1.3.3.zip](Agent-Cards-Plus-v1.3.3.zip?raw=true)
 
-### Bug fixes in 1.3.2
+### Calling fixes in 1.3.3
+
+- Failed or stalled background checks no longer leave driver-number clicks permanently unresponsive. Disabled dispatch access shows a useful message.
+- Confirmation supports telephone links and phone attributes on driver call controls, as well as the original iCabbi class. Conflicting numbers are rejected.
+- Customer call popups are detected when populated late or reused for another number.
+- An absolute deadline covers contact loading, site checks, dialler lookup and delivery. Expired requests cannot click Genesys later, and missing responses release the UI without automatic retries.
+- Hidden old dialler controls no longer mask active controls. Disabled inputs and buttons, ambiguous diallers or a changed number prevent the call.
+- Calling routes share duplicate protection for the selected Genesys tab. Dispatch results match the original request and document; uncertain delivery is reported honestly.
+- UK numbers written as `+44 (0)...` are normalised consistently.
+
+Reload the extension and refresh BOTH iCabbi and Genesys after updating. This version requires the updated Genesys receiver. No browser permissions are added.
+
+### Included fixes from 1.3.2
 
 - Older contact-save replies cannot hide new contacts or restore an outdated number on screen after another window edits them.
 - Hiding or removing the side panel during startup stops its controllers and timers from loading afterwards.
@@ -22,7 +34,7 @@ Existing contacts migrate automatically, with save order retained across worker 
 - Rapid preference changes stay in order during slow or failed saves. Older initial reads cannot undo a new edit, and “All saved” waits for completed writes.
 - Handover copy and note export include the latest draft and tick-box choices. Older save replies cannot replace newer notes on screen.
 
-Existing notes migrate automatically. This patch adds no browser permissions and does not change the calling logic.
+Existing notes migrate automatically. That earlier patch added no browser permissions and did not change calling.
 
 ### Included from 1.3.0
 
@@ -43,6 +55,10 @@ Contacts, notes, the sliding desk, right-click calling and the earlier call-popu
 
 Updating the same extension folder retains its identity and saved data. Avoid uninstalling it or loading a different folder as a second copy when updating.
 
+## If iCabbi still shows no confirmation
+
+Check that its exact hostname is enabled under **Sites**, then refresh iCabbi. The top-level dispatch handler recognises the original `.init-call` control and `tel:` links. If a different control is used or dispatch is embedded in a frame, provide the clicked element's HTML from Inspect with the real number replaced by an example. The separate **Call through Genesys** right-click action remains available for highlighted numbers.
+
 ## First installation
 
 Extract the ZIP, enable **Developer mode** on the browser's Extensions page, and choose **Load unpacked**. Select the extracted `Agent-Cards-Plus` folder containing `manifest.json`. Enable your exact Genesys and dispatch sites from the extension's **Sites** tab, then refresh them.
@@ -51,6 +67,8 @@ The archive includes the source code, full README, installation guide and tests.
 
 ## Validation
 
-All 156 automated checks passed for v1.3.2, including nine new checks for delayed contact replies, interrupted panel startup, preference restoration, migration and storage failures. Checks use simulated documents, geometry and browser APIs. The current layout and real account integration still need checking on a live Genesys wallboard; no real phone call was made during testing.
+All 194 automated checks passed for v1.3.3, including 38 new checks for confirmation triggers, receiver controls, request expiry, stale outcomes, duplicate prevention, slow lookups, UI recovery and UK number formatting. JavaScript syntax, asset references and ZIP integrity also passed.
+
+These checks use simulated documents, geometry, clocks and browser APIs. The reported live iCabbi page was unavailable for inspection, so its current markup and the exact cause of the incident have not been verified. No real phone call was made. Live iCabbi/Genesys integration still needs checking after installation.
 
 Auto fit targets Agent Status widgets. Other native Genesys widgets retain their own content layout and scrolling.
