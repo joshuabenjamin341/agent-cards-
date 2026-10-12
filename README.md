@@ -2,11 +2,19 @@
 
 A Chrome and Edge extension with clearer Genesys agent cards, saved contacts, shift notes, a sliding desk panel and click-to-call tools.
 
-## Latest version: 1.3.3
+## Latest version: 1.3.4
 
-[Download Agent-Cards-Plus-v1.3.3.zip](Agent-Cards-Plus-v1.3.3.zip?raw=true)
+[Download Agent-Cards-Plus-v1.3.4.zip](Agent-Cards-Plus-v1.3.4.zip?raw=true)
 
-### Calling fixes in 1.3.3
+### Notes Backspace fix in 1.3.4
+
+The sliding desk allowed editing keys to reach the website underneath. Because the page sees the drawer container instead of its hidden textarea, a page shortcut could cancel Backspace.
+
+Keyboard, input, composition and clipboard events now stay inside the drawer without cancelling normal editing. The fix covers notes and contact fields, preserves form Escape handling, and leaves page shortcuts available outside the drawer. Deleting the final character remains saved even when an older save completes late.
+
+Replace the files in the SAME installed folder, click **Reload** and refresh pages with the side tab. Saved notes are retained. This patch adds no permissions and includes the earlier calling fixes.
+
+### Included calling fixes from 1.3.3
 
 - Failed or stalled background checks no longer leave driver-number clicks permanently unresponsive. Disabled dispatch access shows a useful message.
 - Confirmation supports telephone links and phone attributes on driver call controls, as well as the original iCabbi class. Conflicting numbers are rejected.
@@ -67,8 +75,8 @@ The archive includes the source code, full README, installation guide and tests.
 
 ## Validation
 
-All 194 automated checks passed for v1.3.3, including 38 new checks for confirmation triggers, receiver controls, request expiry, stale outcomes, duplicate prevention, slow lookups, UI recovery and UK number formatting. JavaScript syntax, asset references and ZIP integrity also passed.
+All 199 automated checks passed for v1.3.4. Five new checks cover the Backspace/page-shortcut conflict, saved deletions, editing and clipboard events, outside-page shortcuts, form Escape handling and clearing a note during delayed saves. Three failing event-propagation checks were reproduced before the fix. JavaScript syntax, asset references and ZIP integrity also passed.
 
-These checks use simulated documents, geometry, clocks and browser APIs. The reported live iCabbi page was unavailable for inspection, so its current markup and the exact cause of the incident have not been verified. No real phone call was made. Live iCabbi/Genesys integration still needs checking after installation.
+These checks use simulated documents, event propagation, editing defaults, geometry, clocks and browser APIs. Native browser keyboard input was not verified. The reported live iCabbi page was unavailable for inspection, so its current markup and the exact cause of the incident have not been verified. No real phone call was made. Live iCabbi/Genesys integration still needs checking after installation.
 
 Auto fit targets Agent Status widgets. Other native Genesys widgets retain their own content layout and scrolling.
